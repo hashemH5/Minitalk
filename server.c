@@ -6,32 +6,30 @@
 /*   By: halbit <halbit@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 23:27:10 by halbit            #+#    #+#             */
-/*   Updated: 2026/01/22 20:57:58 by halbit           ###   ########.fr       */
+/*   Updated: 2026/01/22 21:16:20 by halbit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define _POSIX_C_SOURCE 200809L
 
-#include <signal.h>
-#include <unistd.h>
-#include <stdio.h>
 #include "libft/libft.h"
+#include <signal.h>
 
-unsigned char *saver(unsigned char *rec, char new)
+unsigned char	*saver(unsigned char *rec, char new)
 {
 	char unsigned	*str;
 	int				i;
-	
+
 	i = 0;
 	if (new == '\0')
 	{
 		if (rec)
-			ft_putstr_fd((char*)rec, 1);
+			ft_putstr_fd((char *)rec, 1);
 		ft_putstr_fd("\n", 1);
 		free(rec);
-		return(NULL);
+		return (NULL);
 	}
-	str = malloc(ft_strlen((char*)rec) + 2);
+	str = malloc(ft_strlen((char *)rec) + 2);
 	while (rec && rec[i])
 	{
 		str[i] = rec[i];
@@ -47,8 +45,8 @@ unsigned char *saver(unsigned char *rec, char new)
 static void	sigusr_handler(int sig, siginfo_t *info, void *context)
 {
 	static unsigned char	c = 0;
-	static int	bit = 0;
-	static unsigned char *str = NULL;
+	static int				bit = 0;
+	static unsigned char	*str = NULL;
 
 	(void)context;
 	c <<= 1;

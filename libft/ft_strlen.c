@@ -6,7 +6,7 @@
 /*   By: halbit <halbit@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 21:02:56 by halbit            #+#    #+#             */
-/*   Updated: 2026/01/22 20:30:35 by halbit           ###   ########.fr       */
+/*   Updated: 2026/01/22 21:16:43 by halbit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strlen(const char *s)
 	int	i;
 
 	if (!s)
-		return(0);
+		return (0);
 	i = 0;
 	while (s[i] != '\0')
 		i++;

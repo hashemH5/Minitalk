@@ -6,7 +6,7 @@
 /*   By: halbit <halbit@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 22:10:14 by halbit            #+#    #+#             */
-/*   Updated: 2026/01/22 20:54:57 by halbit           ###   ########.fr       */
+/*   Updated: 2026/01/22 21:28:31 by halbit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,52 @@
 
 #include "libft/libft.h"
 #include <signal.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
 
-volatile int	ready = 0;
+volatile int	g_ready = 0;
 
 static void	action(int sig, siginfo_t *info, void *context)
 {
 	if (sig == SIGUSR1)
-		ready = 1;
+		g_ready = 1;
 	(void)info;
 	(void)context;
 }
+
+void	end_mass(int pid)
+{
+	int	end;
+
+	end = 8;
+	while (end--)
+	{
+		g_ready = 0;
+		kill(pid, SIGUSR2);
+		while (!g_ready)
+			pause();
+	}
+}
+
 static void	str_kill(int pid, char *str)
 {
 	unsigned char	c;
-	int		bit;
-	int		end;		
-	
+	int				bit;
+
 	while (*str)
 	{
 		bit = 8;
 		c = *(str++);
 		while (bit--)
 		{
-			ready = 0;
+			g_ready = 0;
 			if (c >> bit & 1)
 				kill(pid, SIGUSR1);
 			else
 				kill(pid, SIGUSR2);
-			while (!ready)
+			while (!g_ready)
 				pause();
 		}
 	}
-	end = 8;
-	while (end--)
-	{
-		ready = 0;
-		kill(pid, SIGUSR2);
-		while (!ready)
-				pause();
-	}
+	end_mass(pid);
 }
 
 int	main(int argc, char **argv)
@@ -69,8 +72,8 @@ int	main(int argc, char **argv)
 	if (argc != 3 || !((int)ft_strlen(argv[1])))
 		return (1);
 	if (kill(ft_atoi(argv[1]), 0) == -1)
-		return(write(2, "error\n", 6));
-	ft_putstr_fd("Sent    : ", 1);
+		return (write(2, "error\n", 6));
+	ft_putstr_fd("Sent : ", 1);
 	ft_putnbr_fd(ft_strlen(argv[2]), 1);
 	ft_putchar_fd('\n', 1);
 	sigaction(SIGUSR1, &sc, NULL);
