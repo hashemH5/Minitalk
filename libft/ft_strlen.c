@@ -6,16 +6,18 @@
 /*   By: halbit <halbit@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 21:02:56 by halbit            #+#    #+#             */
-/*   Updated: 2025/08/20 20:46:50 by halbit           ###   ########.fr       */
+/*   Updated: 2026/01/22 20:30:35 by halbit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
+	if (!s)
+		return(0);
 	i = 0;
 	while (s[i] != '\0')
 		i++;
