@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: halbit <halbit@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 23:27:10 by halbit            #+#    #+#             */
-/*   Updated: 2026/01/24 20:56:07 by halbit           ###   ########.fr       */
+/*   Updated: 2026/01/24 20:56:16 by halbit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 
 static int	server_error(unsigned char *s)
 {
-	if (s)
-		free(s);
+	free(s);
 	write(2, "server_error\n", 13);
 	exit(1);
 }
@@ -45,7 +44,7 @@ static unsigned char	*saver(unsigned char *rec, char new)
 		str[i] = rec[i];
 		i++;
 	}
-	if (rec)
+	if (!rec)
 		free(rec);
 	str[i] = new;
 	str[++i] = '\0';

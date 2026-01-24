@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: halbit <halbit@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 22:10:14 by halbit            #+#    #+#             */
-/*   Updated: 2026/01/24 21:06:28 by halbit           ###   ########.fr       */
+/*   Updated: 2026/01/24 20:56:35 by halbit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	action(int sig)
 static void	client_error(int e)
 {
 	if (e == -1)
-		write(2, "Error: Failed to send signal.\n", 30);
+		write(2, "Error: Failed to send signal.\n", 28);
 	else if (e == 1)
-		write(2, "Error: Usage: ./client <PID> <STR>\n", 35);
+		write(2, "Error: Usage: ./client <PID> <Message>\n", 39);
 	else if (e == 2)
 		write(2, "Error: Invalid PID.\n", 20);
 	else if (e == 0)
